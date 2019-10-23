@@ -1,6 +1,5 @@
-import {range,multiply,max} from "ramda"
-import reduce from "ramda/es/reduce"
-import product from "ramda/es/product"
+import {range,multiply,max,curry,map,reduce,product,concat} from "ramda"
+import {trace} from "./common"
 
 /*
 In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
@@ -61,16 +60,19 @@ const data = `08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48`.replace(/\n/g," ").split("\ ").map(x=>parseInt(x))
 
 type pos =[number,number]
-const value = (d:number[],pos:pos) => d[pos[0]*20+pos[1]]
-
 const dirs:pos[] = [[-1,1],[0,1],[1,1],[1,0]]
+
+const value = curry((d:number[],pos:pos) => d[pos[0]+pos[1]*20])
+
 const getLine = (p : pos, dir:pos):pos[]=>range(0,4).map((i):pos=>[p[0]+dir[0]*i,p[1]+dir[1]*i])
-const getLines  = (pos:pos):pos[][]=>dirs.map((dir)=>getLine(pos,dir))
-    .filter((line)=>line.every(p=>p[0]>=0&&p[0]<=20&&p[1]>=0&&p[1]<=20))
-const prodLine = (data:number[],pos:pos[]):number=> pos.map(p=>value(data,p)).reduce(multiply)
-console.log(range(0,20).map((x)=>{
-    return range(0,20).map((y)=>
-        getLines([x,y]).map((it)=>prodLine(data,it)).reduce(max)
-    )
-}));
-console.log(getLines([0,0]))
+const getLines  = (dirs:pos[],pos:pos):pos[][]=>dirs.map((dir)=>getLine(pos,dir))
+    .filter((line)=>line.every(p=>p[0]>=0&&p[0]<20&&p[1]>=0&&p[1]<20))
+
+trace(range(0,20).map((x)=>
+  range(0,20).map((y)=>
+    getLines(dirs,[x,y]).map(map(value(data))).map(reduce(multiply,1))).reduce(concat))
+      .reduce(concat)
+        .reduce(max)
+);
+
+console.log(getLines(dirs,[0,0]).map(map(value(data))).map(reduce(multiply,1)))

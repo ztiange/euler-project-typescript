@@ -23,9 +23,8 @@ function cycleLength(divider:number){
     for(let  i=0;i<=divider;i++){
         remainder = remainder % divider * 10;
         var dist = remList.indexOf(remainder);
-        if(dist>=0){ 
+        if(dist>=0)
             return remList.length - dist
-        };
         remList = [...remList,remainder]
     }
     return -1

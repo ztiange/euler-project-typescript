@@ -21,7 +21,7 @@ const sumOfWordChar = (word:string):number => word.split('')
         .reduce(add)
 
 //words:[string] -> sumOfWordWorth:number
-const sumOfWordsWorth = (words:string[]):number =>words.sort()
+export const sumOfWordsWorth = (words:string[]):number =>words.sort()
         .map(sumOfWordChar)
         .map((x,i)=>x*(i+1))
         .reduce(add)

@@ -1,5 +1,5 @@
 import {add, split,compose,map,sort,comparator,reduce,curry,pipe} from "ramda"
-import {stringComparator,trace,mapIndexed} from './common'
+import {stringComparator,trace,mapIndexed} from './common/common'
 /*
 Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order. Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
 
@@ -26,10 +26,10 @@ export const sumOfWordsWorth = (words:string[]):number =>words.sort()
         .map((x,i)=>x*(i+1))
         .reduce(add)
 
-trace(sumOfWordsWorth(names))
+// trace(sumOfWordsWorth(names))
 
-//@ts-ignore
-pipe(sort(stringComparator),map(sumOfWordChar),mapIndexed((x,i)=>x*(i+1)),reduce(add,0),trace)(names)
+// //@ts-ignore
+// pipe(sort(stringComparator),map(sumOfWordChar),mapIndexed((x,i)=>x*(i+1)),reduce(add,0),trace)(names)
 
-//@ts-ignore
-compose(trace,reduce(add,0),mapIndexed((x,i)=>x*(i+1)),map(sumOfWordChar),sort(stringComparator))(names)
+// //@ts-ignore
+// compose(trace,reduce(add,0),mapIndexed((x,i)=>x*(i+1)),map(sumOfWordChar),sort(stringComparator))(names)

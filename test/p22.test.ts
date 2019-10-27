@@ -7,7 +7,7 @@ describe('sumOfWordsWorth', function() {
     expect(sumOfWordsWorth(["AC"])).equal(4);
     expect(sumOfWordsWorth(["BB","AA"])).equal(10);
   });
-})
+}) 
 
 
 

@@ -1,4 +1,4 @@
-import { curry,add } from "ramda";
+import { curry,add,range } from "ramda";
 
 export const trace = <T>(v:T)=>{console.log(v);return v}
 // fn : (t1,i)->t2 -> [t1] -> [t2]
@@ -14,3 +14,6 @@ export const collect = <T>(f:Iterable<T>):T[]=>{
     }
     return result
 }
+
+export const isPrime = (n : number):boolean=> range(2,Math.floor(n/2+1)).every(x=>n%x!==0)
+

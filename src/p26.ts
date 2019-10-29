@@ -1,4 +1,5 @@
 import { max,range } from "ramda";
+import { trace } from "./common/common";
 
 /*
 A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:
@@ -29,5 +30,9 @@ function cycleLength(divider:number){
     }
     return -1
 }
-range(1,1000).map(x=>({index:x, length:cycleLength(x), value:1/x})).forEach(x=>console.log(x));
-console.log(range(1,1000).map(x=>({index:x, length:cycleLength(x), value:1/x})).reduce((x,y)=>x.length>y.length?x:y));
+trace(
+    range(1,1000)
+    .map(x=>({d:x, length:cycleLength(x), value:1/x}))
+    .reduce((x,y)=>x.length>y.length?x:y)
+    .d
+);

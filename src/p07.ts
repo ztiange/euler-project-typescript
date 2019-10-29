@@ -1,5 +1,5 @@
-import {isPrime} from "./common"
-import { foreverFrom } from "./__global";
+import {isPrime} from "./common/primes"
+import { foreverFrom } from "./common/generator.extension";
 /*
 10001st prime
 

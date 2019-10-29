@@ -1,5 +1,5 @@
 import {range,multiply,max,curry,map,reduce,product,concat} from "ramda"
-import {trace} from "./common"
+import {trace} from "./common/common"
 
 /*
 In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
@@ -59,6 +59,7 @@ const value = curry((d:number[],pos:pos) => d[pos[0]+pos[1]*20])
 const getLine = (p : pos, dir:pos):pos[]=>range(0,4).map((i):pos=>[p[0]+dir[0]*i,p[1]+dir[1]*i])
 const getLines  = (dirs:pos[],pos:pos):pos[][]=>dirs.map((dir)=>getLine(pos,dir))
     .filter((line)=>line.every(p=>p[0]>=0&&p[0]<20&&p[1]>=0&&p[1]<20))
+
 
 trace(range(0,20).map((x)=>
   range(0,20).map((y)=>

@@ -15,5 +15,3 @@ export const collect = <T>(f:Iterable<T>):T[]=>{
     return result
 }
 
-export const isPrime = (n : number):boolean=> range(2,Math.floor(n/2+1)).every(x=>n%x!==0)
-

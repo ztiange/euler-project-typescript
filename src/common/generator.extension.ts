@@ -8,7 +8,8 @@ declare global {
         filter(pred : (t:T)=>boolean) : Generator<T>;
         collectFor(forPred:(v:T,i:number) => boolean):T[];
         collect():T[];
-        pick(pickPred:(v:T,i:number) => boolean) : T
+        first() : T | null;
+        pick(pickPred:(v:T,i:number) => boolean) : T | null;
     }
 }
 
@@ -51,9 +52,25 @@ Generator.prototype.pick = function <T>(pickPred:(v:T,i:number) => boolean):T|nu
     return null;
 }
 
+Generator.prototype.first = function <T>():T|null{
+    for (const val of this) {
+        return val;
+    }
+    return null;
+}
+
+
 export function* foreverFrom(start:number){
     var cur = start;
     while(true){
         yield cur++
+    }
+}
+
+export function* pairs(x:[number,number],y:(x:number)=>[number,number]){
+    for(let a = x[0]; a<=x[1];a++){
+        let yrange = y(a)
+        for(let b = yrange[0]; b<=yrange[1] ;b++)
+            yield {x:a,y:b}
     }
 }
